@@ -1,0 +1,35 @@
+setcpm(140/4)
+
+let scale = "d:minor"
+
+
+/*
+$: note("[1 <2 < ~ 4>>]*4")
+*/
+
+$: note("-3*8")
+.trans("0 0 0 <2 -1>")
+.scale(scale)
+.segment(16)
+.trans("0!8 <-1 1>")
+.s("supersaw")
+.dec(.14)
+.detune(rand)
+.gain(1/4)
+._pianoroll()
+
+$: s("hh*8")
+.when("0 0 0 1", x => x.fast(4))
+.phaser(174/8)
+.phaserdepth(1)
+.segment(32)
+.degradeBy(.5)
+.when("0 1", x => {
+    return x.slow(4)
+    .stretch(4)
+})
+.pan(sine.div(2))
+._pianoroll()
+
+.room(.2)
+    .roomsize(3)
