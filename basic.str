@@ -1,0 +1,50 @@
+let stage = 0
+
+setcpm(100/4)
+let scale = "g:minor"
+let freakness = .2
+let play_lead = false
+
+function freak(x) {
+    return x
+    .fm(freakness).fmwave("white")
+    .phaser(.5)
+        .phaserdepth(freakness/2)
+}
+
+let pad =
+chord("<C E <Fm Dm A>>").voicing()
+.trans("<0 1 2 3 2 1>")
+.scale(scale)
+.trans(-12)
+.s("sawtooth")
+.layer(freak)
+.layer(x => (stage >= 2) ? x.lp(2000) : x)
+._pianoroll()
+
+let lead =
+note("[1 _ 2 4]")
+.layer(x => (stage >= 2) ? x.fast(4) : x)
+.trans("[0 3 <0 7>]*4")
+.scale(scale)
+.trans(12)
+.layer(freak)
+.gain(1.5)
+._pianoroll()
+
+let drums =
+s("[bd hh sd <hh oh>]*2")
+.degradeBy(.1)
+.room(.5)
+    .roomsize(10)
+.lp(2500)
+._pianoroll()
+
+stack(
+    pad,
+    lead.gain((stage >= 1) ? 1 : 0),
+    drums,
+)
+.room(.5)
+    .roomsize(2)
+.spectrum()
