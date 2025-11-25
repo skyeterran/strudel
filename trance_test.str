@@ -1,0 +1,20 @@
+// Courtesy of SwitchAngel
+register('rlpf', (x, pat) => { return pat.lpf(pure(x).mul(12).pow(4)) })
+register('rhpf', (x, pat) => { return pat.hpf(pure(x).mul(12).pow(4)) })
+register('acidenv', (x, pat) => pat.rlpf(.25).lpenv(x * 9).lps(.2).lpd(.15))
+//
+
+setcpm(130/4)
+
+$lead: note("1 2 3 4")
+.fast(4)
+.trans(-12)
+.scale("g:minor")
+.s("supersaw")
+.acidenv(sine.range(0.25, 1).slow(4))
+
+$: stack(
+    s("bd:4*4")
+    ,
+    s("hh:1*16").gain(.5)
+)

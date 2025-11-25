@@ -1,5 +1,3 @@
-samples('github:switchangel/breaks')
-samples('github:switchangel/pad')
 setGainCurve(x => Math.pow(x, 2))
 setcpm(170/4)
 let scale = "g:minor"
@@ -31,5 +29,5 @@ $lead: note("[1,3,7]")
 .sometimesBy(0.1, x => x.detune(1))
 .orbit(2)
 .room(1/2)
-    .roomsize(1)
+    .roomsize(3)
 ._pianoroll()
