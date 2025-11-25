@@ -1,0 +1,4 @@
+samples('http://localhost:5432')
+setcpm(145/4)
+
+s("bouncy").fit()
